@@ -3,16 +3,38 @@ const NUMBER_OF_ROWS = 3;
 const turns = NUMBER_OF_ROWS ** 2;
 let turnsCounter = 0;
 
-const board = [
+let board = [
     ["_","_","_"],
     ["_","_","_"],
     ["_","_","_"]
 ]
 
-const checkWin = ()=>false
+const resetBoard =()=>{
+    document.querySelector(".board").remove();
+    createBoard();
+    board = [
+        ["_","_","_"],
+        ["_","_","_"],
+        ["_","_","_"]
+    ];
+    turnsCounter =0;
+    currentPlayer = "X";
+}
 
-const runWinEvent = ()=>false
-const runDrawEvent = ()=>false
+const checkWin = ()=>true;
+
+const runWinEvent = (currentPlayer)=>{
+    setTimeout(() => {
+        alert(`Player ${currentPlayer} won!`);
+        resetBoard();
+    }, 100);
+}
+const runDrawEvent = ()=>{
+    setTimeout(() => {
+        alert("Draw");
+        resetBoard();
+    }, 100);
+}
 
 const getCellPlacement = (index,numberOfRows)=>{
     const row = Math.floor(index / numberOfRows);
@@ -35,7 +57,7 @@ const cellClickHandler = (event,index) =>{
         drawMarkInCell(cell,currentPlayer);
        
         if (checkWin()){
-            runWinEvent()
+            runWinEvent(currentPlayer)
         }else{
             turnsCounter === turns && runDrawEvent();
             currentPlayer = currentPlayer === "X"?"O":"X";
@@ -64,3 +86,4 @@ const createBoard =()=>{
     container.insertAdjacentElement("afterbegin",board)
 }
 createBoard();
+document.querySelector("#reset").onclick = ()=> resetBoard();
