@@ -1,5 +1,5 @@
 let currentPlayer = "X";
-const NUMBER_OF_ROWS = 4;
+const NUMBER_OF_ROWS = 3;
 const turns = NUMBER_OF_ROWS ** 2;
 let turnsCounter = 0;
 
